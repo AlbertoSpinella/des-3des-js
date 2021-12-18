@@ -1,0 +1,19 @@
+{
+  "name": "des-3des",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node main.js",
+    "lint:check": "eslint -c ./.eslintrc.cjs .",
+    "lint:fix": "eslint -c ./.eslintrc.cjs . --fix"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.7.0",
+    "@typescript-eslint/parser": "^5.7.0",
+    "eslint": "^8.5.0"
+  }
+}
