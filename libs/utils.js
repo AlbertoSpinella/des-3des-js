@@ -12,7 +12,7 @@ export const hexToBin = (hex) => {
 };
 
 export const padKey = (key) => {
-	if  (key.length > 16) throw new Error("KEY_LENGTH_BIGGER_16");
+	if  (key.length > 16) throw new Error("ERR_KEY_LENGTH_BIGGER_16");
 	let res = "";
 	res += key;
 	if (key.length % 16 != 0) {
@@ -30,13 +30,20 @@ export const PC1 = (key) => {
 	return result;
 };
 
-export const shiftAfterPC1 = (cArray, dArray) => {
+export const shiftAfterPC1 = (cString, dString) => {
+	if (cString.length != dString.length) throw new Error("ERR_UNEQUAL_HALFKEYS_LENGTHS");
+	if (cString.length != 28) throw new Error("ERR_HALFKEYS_LENGTH_NOT_28");
+	const cArray = [];
+	const dArray = [];
+	cArray.push(cString);
+	dArray.push(dString);
 	for (let i=0; i<shiftsTable.length; i++) {
-		const cString = cArray[i];
-		const dString = dArray[i];
+		const currentCString = cArray[i];
+		const currentDString = dArray[i];
 		const numberOfShifts = shiftsTable[i];
 		const n = numberOfShifts % cString.length;
-		cArray.push(cString.slice(n) + cString.slice(0, n));
-		dArray.push(dString.slice(n) + dString.slice(0, n));
+		cArray.push(currentCString.slice(n) + currentCString.slice(0, n));
+		dArray.push(currentDString.slice(n) + currentDString.slice(0, n));
 	}
+	return { cArray, dArray };
 };

@@ -5,23 +5,23 @@ import {
     shiftAfterPC1
 } from "./libs/utils.js";
 
-const plaintext = "0123456789ABCDEF";
-const key = "133457799BBCDFF1";
-
 const splittedKey = {};
+const cArray = [];
+const dArray = [];
 
 export const keySchedulation = (key) => {
     const paddedKey = padKey(key);
     const binaryKey = hexToBin(paddedKey);
     const permuted1Key = PC1(binaryKey);
-    const cArray = [];
-    const dArray = [];
-    cArray.push(permuted1Key.substring(0, permuted1Key.length/2));
-    dArray.push(permuted1Key.substring(permuted1Key.length/2, permuted1Key.length));
-    shiftAfterPC1(cArray, dArray);
+    const cArray0 = permuted1Key.substring(0, permuted1Key.length/2);
+    const dArray0 = permuted1Key.substring(permuted1Key.length/2, permuted1Key.length);
+    const { cArray, dArray } = shiftAfterPC1(cArray0, dArray0);
+    console.log({ cArray, dArray });
 };
 
 
 export const main = (plaintext, key) => {
     keySchedulation(key);
 };
+
+main("0123456789ABCDEF", "133457799BBCDFF1");
