@@ -1,10 +1,13 @@
 import {
     hexToBin,
-    padKey,
+    padKey
+} from "./libs/utils.js";
+
+import {
     PC1,
     shiftAfterPC1,
     PC2
-} from "./libs/utils.js";
+} from "./libs/keySchedulation.js";
 
 const splittedKey = {};
 const cArray = [];

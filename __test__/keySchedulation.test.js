@@ -1,10 +1,14 @@
 import {
     padKey,
-    hexToBin,
+    hexToBin
+} from "../libs/utils.js";
+
+import {
     PC1,
     shiftAfterPC1,
     PC2
-} from "../libs/utils.js";
+} from "../libs/keySchedulation.js";
+
 import { expectedValues } from "../libs/test/expectedValues.js";
 import { testData } from "../libs/test/testData.js";
 import { keySchedulation } from "../main.js";
