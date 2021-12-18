@@ -15,3 +15,11 @@ export const padKey = (key) => {
 	}
 	return res;
 };
+
+export const xor = (a, b) => {
+	if (a.length != b.length) throw new Error("ERR_XOR_UNEQUAL_LENGTHS");
+	let result = "";
+	for (let i=0; i<a.length; i++)
+		result += a[i] ^ b[i];
+	return result;
+};
