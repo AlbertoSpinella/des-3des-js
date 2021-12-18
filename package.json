@@ -7,13 +7,15 @@
   "scripts": {
     "dev": "node main.js",
     "lint:check": "eslint -c ./.eslintrc.cjs .",
-    "lint:fix": "eslint -c ./.eslintrc.cjs . --fix"
+    "lint:fix": "eslint -c ./.eslintrc.cjs . --fix",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest --detectOpenHandles --runInBand"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.7.0",
     "@typescript-eslint/parser": "^5.7.0",
-    "eslint": "^8.5.0"
+    "eslint": "^8.5.0",
+    "jest": "^27.4.5"
   }
 }

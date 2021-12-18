@@ -10,7 +10,7 @@ const key = "133457799BBCDFF1";
 
 const splittedKey = {};
 
-const keySchedulation = (key) => {
+export const keySchedulation = (key) => {
     const paddedKey = padKey(key);
     const binaryKey = hexToBin(paddedKey);
     const permuted1Key = PC1(binaryKey);
@@ -21,4 +21,7 @@ const keySchedulation = (key) => {
     shiftAfterPC1(cArray, dArray);
 };
 
-keySchedulation(key);
+
+export const main = (plaintext, key) => {
+    keySchedulation(key);
+};
