@@ -52,7 +52,7 @@ export const shiftAfterPC1 = (cString, dString) => {
 export const PC2 = (cArray, dArray) => {
 	const permuted2Keys = [];
 	if (cArray.length != dArray.length) throw new Error("ERR_UNEQUAL_HALFKEYS_ARRAYS_LENGTHS");
-	if (cArray.length != 17) throw new Error("ERR_HALFKEYS_ARRAYS__LENGTH_NOT_17");
+	if (cArray.length != 17) throw new Error("ERR_HALFKEYS_ARRAYS_LENGTHS_NOT_17");
 	for (let i=1; i<cArray.length; i++) {
 		let result = "";
 		const currentCi = cArray[i] + dArray[i];
