@@ -38,7 +38,7 @@ test('ERR - PadKey more than 16', ()  => {
     }
 });
 
-test('HexToBin', ()  => {
+test('Key HexToBin', ()  => {
     const binaryKey = hexToBin(cache.paddedKey);
     cache.binaryKey = binaryKey;
     expect(binaryKey).toBe(expectedValues.binaryKey);
