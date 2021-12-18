@@ -2,11 +2,12 @@ import {
     padKey,
     hexToBin,
     PC1,
-    shiftAfterPC1
+    shiftAfterPC1,
+    PC2
 } from "../libs/utils.js";
 import { expectedValues } from "../libs/test/expectedValues.js";
 import { testData } from "../libs/test/testData.js";
-// import { keySchedulation } from "../main.js";
+import { keySchedulation } from "../main.js";
 
 const cache = {};
 
@@ -48,6 +49,18 @@ test('ShiftsAfterPC1', ()  => {
     const cArray0 = testData.cArray0;
     const dArray0 = testData.dArray0;
     const { cArray, dArray } = shiftAfterPC1(cArray0, dArray0);
+    cache.cArray = cArray;
+    cache.dArray = dArray;
     expect(cArray).toStrictEqual(expectedValues.cArray);
     expect(dArray).toStrictEqual(expectedValues.dArray);
+});
+
+test('PC2', ()  => {
+    const permuted2Keys = PC2(cache.cArray, cache.dArray);
+    expect(permuted2Keys).toStrictEqual(expectedValues.permuted2Keys);
+});
+
+test("Complessive Key Schedulation", () => {
+    const permutedKeys = keySchedulation(testData.key);
+    expect(permutedKeys).toStrictEqual(expectedValues.permuted2Keys);
 });

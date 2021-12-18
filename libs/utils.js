@@ -1,6 +1,7 @@
 import {
 	PC1Table,
-	shiftsTable
+	shiftsTable,
+	PC2Table
 } from "./tables.js";
 
 export const hexToBin = (hex) => {
@@ -46,4 +47,20 @@ export const shiftAfterPC1 = (cString, dString) => {
 		dArray.push(currentDString.slice(n) + currentDString.slice(0, n));
 	}
 	return { cArray, dArray };
+};
+
+export const PC2 = (cArray, dArray) => {
+	const permuted2Keys = [];
+	if (cArray.length != dArray.length) throw new Error("ERR_UNEQUAL_HALFKEYS_ARRAYS_LENGTHS");
+	if (cArray.length != 17) throw new Error("ERR_HALFKEYS_ARRAYS__LENGTH_NOT_17");
+	for (let i=1; i<cArray.length; i++) {
+		let result = "";
+		const currentCi = cArray[i] + dArray[i];
+		for (let j=0; j<PC2Table.length; j++) {
+			const current =  PC2Table[j];
+			result += currentCi[current-1];
+		}
+		permuted2Keys.push(result);
+	}
+	return permuted2Keys;
 };
