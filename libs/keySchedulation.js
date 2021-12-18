@@ -4,6 +4,11 @@ import {
 	PC2Table
 } from "./tables.js";
 
+import {
+    hexToBin,
+    padKey
+} from "./utils.js";
+
 export const PC1 = (key) => {
 	let result = "";
 	for (let i=0; i<PC1Table.length; i++) {
@@ -45,4 +50,15 @@ export const PC2 = (cArray, dArray) => {
 		permuted2Keys.push(result);
 	}
 	return permuted2Keys;
+};
+
+export const keySchedulation = (key) => {
+    const paddedKey = padKey(key);
+    const binaryKey = hexToBin(paddedKey);
+    const permuted1Key = PC1(binaryKey);
+    const cArray0 = permuted1Key.substring(0, permuted1Key.length/2);
+    const dArray0 = permuted1Key.substring(permuted1Key.length/2, permuted1Key.length);
+    const { cArray, dArray } = shiftAfterPC1(cArray0, dArray0);
+    const permuted2Keys = PC2(cArray, dArray);
+    return permuted2Keys;
 };

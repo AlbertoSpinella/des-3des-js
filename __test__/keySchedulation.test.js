@@ -6,12 +6,12 @@ import {
 import {
     PC1,
     shiftAfterPC1,
-    PC2
+    PC2,
+    keySchedulation
 } from "../libs/keySchedulation.js";
 
 import { expectedValues } from "../libs/test/expectedValues.js";
 import { testData } from "../libs/test/testData.js";
-import { keySchedulation } from "../main.js";
 
 const cache = {};
 
