@@ -132,7 +132,7 @@ module.exports = {
         "new-cap": ["error", { "capIsNew": false }],
         "no-alert": "error",    
         "no-array-constructor": "error",
-        "no-bitwise": "warn",
+        // "no-bitwise": "warn",
         "no-caller": "error",
         "no-case-declarations": "error",
         //"no-confusing-arrow": "error",

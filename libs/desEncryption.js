@@ -36,7 +36,7 @@ export const feistelExpansion = (previousR) => {
 export const feistel = (previousR, iKey) => {
     const feistelExpanded =  feistelExpansion(previousR);
     const feistelXored = xor(feistelExpanded, iKey);
-    console.log({feistelXored});
+    console.log({ feistelXored });
 };
 
 export const encryptionRound = (L0, R0, permutedKeys) => {
