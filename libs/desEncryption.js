@@ -97,9 +97,7 @@ export const encryptionRounds = (L0, R0, permutedKeys) => {
     return { LArray, RArray };
 };
 
-export const switchAfterRounds = (L16, R16) => {
-    return R16 + L16;
-};
+export const switchAfterRounds = (L16, R16) => R16 + L16;
 
 export const IPFinal = (switched)  => {
     let result = "";

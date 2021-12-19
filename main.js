@@ -6,7 +6,7 @@ export const main = (plaintext, key) => {
     // console.log(permutedKeys);
 
     const ciphertext = desEncryption(plaintext, permutedKeys);
-    console.log({ciphertext});
+    console.log({ ciphertext });
 };
 
 main("0123456789ABCDEF", "133457799BBCDFF1");

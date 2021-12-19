@@ -27,7 +27,7 @@ export const xor = (a, b) => {
 export const intToBinPadded = (binary) => {
 	let number = binary.toString(2);
 	if (number.length > 4) throw new Error("ERR_BIN_TO_INT_PADDED_MORE_4");
-	while (number.length < 4) number = "0" + number;
+	while (number.length < 4) number = `0${number}`;
 	return number;
 };
 
