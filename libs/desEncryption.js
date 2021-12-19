@@ -79,7 +79,7 @@ export const feistel = (previousR, iKey) => {
     return pPermuted;
 };
 
-export const encryptionRound = (L0, R0, permutedKeys) => {
+export const encryptionRounds = (L0, R0, permutedKeys) => {
     const LArray = [];
     const RArray = [];
     LArray.push(L0);
@@ -88,8 +88,11 @@ export const encryptionRound = (L0, R0, permutedKeys) => {
         const current = {};
         current.Li = RArray[round];
         const feistelEncrypted = feistel(RArray[round], permutedKeys[round]);
-        // current.Ri = xor(LArray[round], feistelEncrypted);
+        current.Ri = xor(LArray[round], feistelEncrypted);
+        LArray.push(current.Li);
+        RArray.push(current.Ri);
     }
+    return { LArray, RArray };
 };
 
 export const desEncryption = (plaintext, permutedKeys) => {
@@ -97,5 +100,6 @@ export const desEncryption = (plaintext, permutedKeys) => {
     const binaryPlaintext = hexToBin(plaintext);
     const IPedPlaintext = IP(binaryPlaintext);
     const { L0, R0 } = splitInL0AndR0(IPedPlaintext);
-    const { LArray, RArray } = encryptionRound(L0, R0, permutedKeys);
+    const { LArray, RArray } = encryptionRounds(L0, R0, permutedKeys);
+    console.log({ LArray, RArray });
 };

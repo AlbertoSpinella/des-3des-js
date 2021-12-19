@@ -9,7 +9,8 @@ import {
     splitInL0AndR0,
     sBoxDivision,
     pPermutation,
-    feistel
+    feistel,
+    encryptionRounds
 } from "../libs/desEncryption.js";
 
 import { expectedValues } from "../libs/test/expectedValues.js";
@@ -33,6 +34,7 @@ test('IP', ()  => {
 test('Split in R0 and L0', ()  => {
     const { L0, R0 } = splitInL0AndR0(cache.IPedPlaintext);
     cache.previousR = R0;
+    cache.previousL = L0;
     expect(L0).toBe(expectedValues.L0);
     expect(R0).toBe(expectedValues.R0);
 });
@@ -72,4 +74,10 @@ test('Feistel pPermutation', ()  => {
 test('Complessive Feistel', ()  => {
     const feistelEncrypted = feistel(cache.previousR, expectedValues.permuted2Keys[0]);
     expect(feistelEncrypted).toBe(expectedValues.pPermuted);
+});
+
+test('Encryption rounds', ()  => {
+    const { LArray, RArray } = encryptionRounds(cache.previousL, cache.previousR, expectedValues.permuted2Keys);
+    expect(LArray).toStrictEqual(expectedValues.LArray);
+    expect(RArray).toStrictEqual(expectedValues.RArray);
 });
