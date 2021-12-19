@@ -18,8 +18,8 @@ import {
     desEncryption
 } from "../libs/desEncryption.js";
 
-import { expectedValues } from "../libs/test/expectedValues.js";
-import { testData } from "../libs/test/testData.js";
+import { expectedValues } from "../libs/test/correctness.expectedValues.js";
+import { testData } from "../libs/test/correctness.testData.js";
 
 const cache = {};
 

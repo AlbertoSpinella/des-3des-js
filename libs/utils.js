@@ -11,7 +11,9 @@ export const padKey = (key) => {
 	let res = "";
 	res += key;
 	if (key.length % 16 != 0) {
-		for (let i=0; i < 16 - (key.length % 16); i++) res += "0";
+		console.log("WE");
+		for (let i=0; i < 16 - (key.length % 16); i++)
+			res += "0";
 	}
 	return res;
 };
