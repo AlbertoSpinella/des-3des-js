@@ -2,7 +2,7 @@ import { keySchedulation } from "./libs/keySchedulation.js";
 import { desEncryption } from "./libs/desEncryption.js";
 
 export const main = (plaintext, key) => {
-    console.log({ plaintext, key});
+    console.log({ plaintext, key });
     const permutedKeys = keySchedulation(key);
 
     const ciphertext = desEncryption(plaintext, permutedKeys);
