@@ -7,6 +7,9 @@ import {
     feistelExpansion,
     IP,
     splitInL0AndR0,
+    sBoxDivision,
+    pPermutation,
+    feistel
 } from "../libs/desEncryption.js";
 
 import { expectedValues } from "../libs/test/expectedValues.js";
@@ -51,5 +54,22 @@ test('Plaintext expansion', ()  => {
 
 test('Feistel xor', ()  => {
     const feistelXored = xor(cache.feistelExpanded, expectedValues.permuted2Keys[0]);
+    cache.feistelXored = feistelXored;
     expect(feistelXored).toBe(expectedValues.feistelXored);
+});
+
+test('Feistel sBoxDivision', ()  => {
+    const sBoxed = sBoxDivision(cache.feistelXored);
+    cache.sBoxed = sBoxed;
+    expect(sBoxed).toBe(expectedValues.sBoxed);
+});
+
+test('Feistel pPermutation', ()  => {
+    const pPermuted = pPermutation(cache.sBoxed);
+    expect(pPermuted).toBe(expectedValues.pPermuted);
+});
+
+test('Complessive Feistel', ()  => {
+    const feistelEncrypted = feistel(cache.previousR, expectedValues.permuted2Keys[0]);
+    expect(feistelEncrypted).toBe(expectedValues.pPermuted);
 });

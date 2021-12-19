@@ -1,11 +1,14 @@
 import {
     IPTable,
-    expansionTable
+    expansionTable,
+    sTable,
+    pTable
 } from "./tables.js";
 
 import {
     hexToBin,
-    xor
+    xor,
+    intToBinPadded
 } from "./utils.js";
 
 export const IP = (plaintext) => {
@@ -33,10 +36,47 @@ export const feistelExpansion = (previousR) => {
     return expanded;
 };
 
+export const findInS = (i, six) => {
+    let row = "";
+    let col = "";
+    for (let j=0; j<six.length; j++) {
+        if (j%6 == 0 || j%6 == 5) row += six[j];
+        else col += six[j];
+    }
+    row = parseInt(row, 2);
+    col = parseInt(col, 2);
+    const numericSResult = sTable[i][row][col];
+    const binarySResult =  intToBinPadded(numericSResult);
+    return binarySResult;
+};
+
+export const sBoxDivision = (feistelXored) => {
+    let sBoxResult = "";
+    for (let i=0; i<8; i++) {
+        let result = "";
+        for (let j=0; j<6; j++) {
+            result += feistelXored[( 6 * i ) + j];
+        }
+        sBoxResult += findInS(i, result);
+    }
+    return sBoxResult;
+};
+
+export const pPermutation = (sBoxed) => {
+    let result = "";
+    for (let i=0; i<pTable.length; i++) {
+        const current = pTable[i];
+        result += sBoxed[current - 1];
+    }
+    return result;
+};
+
 export const feistel = (previousR, iKey) => {
     const feistelExpanded =  feistelExpansion(previousR);
     const feistelXored = xor(feistelExpanded, iKey);
-    console.log({ feistelXored });
+    const sBoxed = sBoxDivision(feistelXored);
+    const pPermuted = pPermutation(sBoxed);
+    return pPermuted;
 };
 
 export const encryptionRound = (L0, R0, permutedKeys) => {
@@ -47,7 +87,7 @@ export const encryptionRound = (L0, R0, permutedKeys) => {
     for (let round=0; round<16; round++) {
         const current = {};
         current.Li = RArray[round];
-        const feistelEncrypted  = feistel(RArray[round], permutedKeys[round]);
+        const feistelEncrypted = feistel(RArray[round], permutedKeys[round]);
         // current.Ri = xor(LArray[round], feistelEncrypted);
     }
 };
@@ -57,6 +97,5 @@ export const desEncryption = (plaintext, permutedKeys) => {
     const binaryPlaintext = hexToBin(plaintext);
     const IPedPlaintext = IP(binaryPlaintext);
     const { L0, R0 } = splitInL0AndR0(IPedPlaintext);
-    console.log({ L0, R0 });
     const { LArray, RArray } = encryptionRound(L0, R0, permutedKeys);
 };
