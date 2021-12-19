@@ -126,5 +126,41 @@ export const expectedValues = {
             "FCDB3291DE21F0C0",
             "869EFD7F9F265A09"
         ]
+    },
+    P: {
+        ciphertexts: [
+            "88D55E54F54C97B4",
+            "0C0CC00C83EA48FD",
+            "83BC8EF3A6570183",
+            "DF725DCAD94EA2E9",
+            "E652B53B550BE8B0",
+            "AF527120C485CBB0",
+            "0F04CE393DB926D5",
+            "C9F00FFC74079067",
+            "7CFD82A593252B4E",
+            "CB49A2F9E91363E3",
+            "00B588BE70D23F56",
+            "406A9A6AB43399AE",
+            "6CB773611DCA9ADA",
+            "67FD21C17DBB5D70",
+            "9592CB4110430787",
+            "A6B7FF68A318DDD3",
+            "4D102196C914CA16",
+            "2DFA9F4573594965",
+            "B46604816C0E0774",
+            "6E7E6221A4F34E87",
+            "AA85E74643233199",
+            "2E5A19DB4D1962D6",
+            "23A866A809D30894",
+            "D812D961F017D320",
+            "055605816E58608F",
+            "ABD88E8B1B7716F1",
+            "537AC95BE69DA1E1",
+            "AED0F6AE3C25CDD8",
+            "B3E35A5EE53E7B8D",
+            "61C79C71921A2EF8",
+            "E2F5728F0995013C",
+            "1AEAC39A61F0A464"
+        ]
     }
 };
