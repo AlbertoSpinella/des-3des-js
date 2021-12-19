@@ -11,7 +11,7 @@ For correctness testing reference, visit NIST: https://nvlpubs.nist.gov/nistpubs
  - Run `npm run test:random` for test with random keys & plaintexts
 
 ## Notes
- - There's a refuse in NIST test data. Precisely, at page 28 (`IP AND E TEST`) the ciphertext n. 30 has the digit `4` one column right than the expected. My test data are fixed about.
+ - There's a refuse in NIST test data. Precisely, at page 28 (`IP AND E TEST`) the ciphertext n. 30 has the digit `4` one column right than the expected. My test data consider this and is settled about it.
  - NIST ciphertext:
  - `0000000040000000`
  - Fixed ciphertext:
