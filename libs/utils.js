@@ -30,3 +30,13 @@ export const intToBinPadded = (binary) => {
 	while (number.length < 4) number = "0" + number;
 	return number;
 };
+
+export const binToHex = (binary) => {
+	let result = "";
+	if (binary.length % 4 != 0) throw new Error("ERR_BIN_TO_HEX_INVALID_BINARY_FORMAT");
+	for (let i=0; i<binary.length; i+=4) {
+		const byte = parseInt(binary.substring(i, i+4), 2).toString(16);
+		result += byte.toUpperCase();
+	}
+	return result;
+};

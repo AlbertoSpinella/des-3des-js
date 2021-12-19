@@ -2,13 +2,15 @@ import {
     IPTable,
     expansionTable,
     sTable,
-    pTable
+    pTable,
+    IPFinalTable
 } from "./tables.js";
 
 import {
     hexToBin,
     xor,
-    intToBinPadded
+    intToBinPadded,
+    binToHex
 } from "./utils.js";
 
 export const IP = (plaintext) => {
@@ -95,11 +97,27 @@ export const encryptionRounds = (L0, R0, permutedKeys) => {
     return { LArray, RArray };
 };
 
+export const switchAfterRounds = (L16, R16) => {
+    return R16 + L16;
+};
+
+export const IPFinal = (switched)  => {
+    let result = "";
+    for (let i=0; i<IPFinalTable.length; i++) {
+        const current = IPFinalTable[i];
+        result += switched[current - 1];
+    }
+    return result;
+};
+
 export const desEncryption = (plaintext, permutedKeys) => {
     if (plaintext.length != 16) throw new Error("ERR_PLAINTEXT_LENGTH_NOT_16");
     const binaryPlaintext = hexToBin(plaintext);
     const IPedPlaintext = IP(binaryPlaintext);
     const { L0, R0 } = splitInL0AndR0(IPedPlaintext);
     const { LArray, RArray } = encryptionRounds(L0, R0, permutedKeys);
-    console.log({ LArray, RArray });
+    const switched = switchAfterRounds(LArray[LArray.length - 1], RArray[RArray.length - 1]);
+    const binaryCiphertext = IPFinal(switched);
+    const ciphertext = binToHex(binaryCiphertext);
+    return ciphertext;
 };

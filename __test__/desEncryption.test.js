@@ -1,6 +1,8 @@
 import {
     hexToBin,
-    xor
+    xor,
+    intToBinPadded,
+    binToHex
 } from "../libs/utils.js";
 
 import {
@@ -10,7 +12,10 @@ import {
     sBoxDivision,
     pPermutation,
     feistel,
-    encryptionRounds
+    encryptionRounds,
+    switchAfterRounds,
+    IPFinal,
+    desEncryption
 } from "../libs/desEncryption.js";
 
 import { expectedValues } from "../libs/test/expectedValues.js";
@@ -60,10 +65,29 @@ test('Feistel xor', ()  => {
     expect(feistelXored).toBe(expectedValues.feistelXored);
 });
 
+test('ERR - Feistel xor different lenghts', ()  => {
+    try {
+        const feistelXored = xor(cache.feistelExpanded.slice(0, -1), expectedValues.permuted2Keys[0]);
+        expect(0).toBe(1);
+    } catch (error) {
+        expect(error.message).toBe(expectedValues.ERR_XOR_UNEQUAL_LENGTHS);        
+    }
+});
+
 test('Feistel sBoxDivision', ()  => {
     const sBoxed = sBoxDivision(cache.feistelXored);
     cache.sBoxed = sBoxed;
     expect(sBoxed).toBe(expectedValues.sBoxed);
+});
+
+test('ERR - IntToBinPadded invalid numericSResult', ()  => {
+    try {
+        const binarySResult = intToBinPadded(16);
+        expect(0).toBe(1);
+    } catch (error) {
+        expect(error.message).toBe(expectedValues.ERR_BIN_TO_INT_PADDED_MORE_4);
+    }
+
 });
 
 test('Feistel pPermutation', ()  => {
@@ -80,4 +104,40 @@ test('Encryption rounds', ()  => {
     const { LArray, RArray } = encryptionRounds(cache.previousL, cache.previousR, expectedValues.permuted2Keys);
     expect(LArray).toStrictEqual(expectedValues.LArray);
     expect(RArray).toStrictEqual(expectedValues.RArray);
+});
+
+test('Switch after rounds', ()  => {
+    const L16 = expectedValues.LArray[expectedValues.LArray.length - 1];
+    const R16 = expectedValues.RArray[expectedValues.RArray.length - 1];
+    const switched = switchAfterRounds(L16, R16);
+    cache.switched = switched;
+    expect(switched).toBe(expectedValues.switched);
+});
+
+test('IPFinal', ()  => {
+    const binaryCiphertext = IPFinal(cache.switched);
+    expect(binaryCiphertext).toBe(expectedValues.binaryCiphertext);
+});
+
+test('Complessive DES encryption', ()  => {
+    const ciphertext = desEncryption(testData.plaintext, expectedValues.permuted2Keys);
+    expect(ciphertext).toBe(expectedValues.ciphertext);
+});
+
+test('ERR - Complessive DES encryption with plaintext not 16', ()  => {
+    try {
+        const ciphertext = desEncryption(testData.plaintext.slice(0, -1), expectedValues.permuted2Keys);
+        expect(0).toBe(1);
+    } catch (error) {
+        expect(error.message).toBe(expectedValues.ERR_PLAINTEXT_LENGTH_NOT_16);
+    }
+});
+
+test('ERR - binToHex with invalid binary format', ()  => {
+    try {
+        const ciphertext = binToHex(expectedValues.binaryCiphertext.slice(0,1));
+        expect(0).toBe(1);
+    } catch (error) {
+        expect(error.message).toBe(expectedValues.ERR_BIN_TO_HEX_INVALID_BINARY_FORMAT);
+    }
 });

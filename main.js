@@ -5,7 +5,8 @@ export const main = (plaintext, key) => {
     const permutedKeys = keySchedulation(key);
     // console.log(permutedKeys);
 
-    const temp = desEncryption(plaintext, permutedKeys);
+    const ciphertext = desEncryption(plaintext, permutedKeys);
+    console.log({ciphertext});
 };
 
 main("0123456789ABCDEF", "133457799BBCDFF1");
