@@ -162,5 +162,28 @@ export const expectedValues = {
             "E2F5728F0995013C",
             "1AEAC39A61F0A464"
         ]
+    },
+    SBox: {
+        ciphertexts: [
+            "690F5B0D9A26939B",
+            "7A389D10354BD271",
+            "868EBB51CAB4599A",
+            "7178876E01F19B2A",
+            "AF37FB421F8C4095",
+            "86A560F10EC6D85B",
+            "0CD3DA020021DC09",
+            "EA676B2CB7DB2B7A",
+            "DFD64A815CAF1A0F",
+            "5C513C9C4886C088",
+            "0A2AEEAE3FF4AB77",
+            "EF1BF03E5DFA575A",
+            "88BF0DB6D70DEE56",
+            "A1F9915541020B56",
+            "6FBF1CAFCFFD0556",
+            "2F22E49BAB7CA1AC",
+            "5A6B612CC26CCE4A",
+            "5F4C038ED12B2E41",
+            "63FAC0D034D9F793"
+        ]
     }
 };
