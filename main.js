@@ -9,5 +9,4 @@ export const main = (plaintext, key) => {
     return ciphertext;
 };
 
-// console.log({ ciphertext: main("0123456789ABCDEF", "133457799BBCDFF1") });
-console.log({ ciphertext: main("E1652C6B138C64A5", "0101010101010101") });
+console.log({ ciphertext: main("0123456789ABCDEF", "133457799BBCDFF1") });

@@ -13,5 +13,3 @@ export const standardDes = (hexKey, hexPlaintext) => {
         process.exit(1);
     }
 };
-
-console.log({ ciphertext: standardDes("133457799BBCDFF1", "0123456789ABCDEF") });
