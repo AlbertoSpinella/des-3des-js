@@ -6,13 +6,12 @@ export const hexToBin = (hex) => {
 	return result;
 };
 
-export const padKey = (key) => {
-	if  (key.length > 16) throw new Error("ERR_KEY_LENGTH_BIGGER_16");
+export const padTo16Bytes = (input) => {
+	if  (input.length > 16) throw new Error("ERR_INPUT_LENGTH_BIGGER_16");
 	let res = "";
-	res += key;
-	if (key.length % 16 != 0) {
-		console.log("WE");
-		for (let i=0; i < 16 - (key.length % 16); i++)
+	res += input;
+	if (input.length % 16 != 0) {
+		for (let i=0; i < 16 - (input.length % 16); i++)
 			res += "0";
 	}
 	return res;

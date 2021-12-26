@@ -1,5 +1,5 @@
 import {
-    padKey,
+    padTo16Bytes,
     hexToBin
 } from "../libs/utils.js";
 
@@ -15,26 +15,26 @@ import { testData } from "../libs/test/correctness.testData.js";
 
 const cache = {};
 
-test('PadKey already 16', ()  => {
+test('padTo16Bytes already 16', ()  => {
     const key = testData.key;
-    const paddedKey = padKey(key);
+    const paddedKey = padTo16Bytes(key);
     cache.paddedKey = paddedKey;
     expect(paddedKey).toBe(expectedValues.paddedKey);
 });
 
-test('PadKey less than 16', ()  => {
+test('padTo16Bytes less than 16', ()  => {
     const key = testData.key15;
-    const paddedKey = padKey(key);
+    const paddedKey = padTo16Bytes(key);
     expect(paddedKey).toBe(expectedValues.paddedKeyLess16);
 });
 
-test('ERR - PadKey more than 16', ()  => {
+test('ERR - padTo16Bytes more than 16', ()  => {
     try {
         const key = testData.key17;
-        const paddedKey = padKey(key);
+        const paddedKey = padTo16Bytes(key);
         expect(0).toBe(1);
     } catch (error) {
-        expect(error.message).toBe(expectedValues.ERR_KEY_LENGTH_BIGGER_16);
+        expect(error.message).toBe(expectedValues.ERR_INPUT_LENGTH_BIGGER_16);
     }
 });
 

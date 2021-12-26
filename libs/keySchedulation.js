@@ -6,7 +6,7 @@ import {
 
 import {
     hexToBin,
-    padKey
+    padTo16Bytes
 } from "./utils.js";
 
 export const PC1 = (key) => {
@@ -53,7 +53,7 @@ export const PC2 = (cArray, dArray) => {
 };
 
 export const keySchedulation = (key) => {
-    const paddedKey = padKey(key);
+    const paddedKey = padTo16Bytes(key);
     const binaryKey = hexToBin(paddedKey);
     const permuted1Key = PC1(binaryKey);
     const cArray0 = permuted1Key.substring(0, permuted1Key.length/2);
