@@ -1,7 +1,4 @@
-import {
-    padTo16Bytes,
-    hexToBin
-} from "../libs/utils.js";
+import { hexToBin } from "../libs/utils.js";
 
 import {
     PC1,
@@ -15,31 +12,8 @@ import { testData } from "../libs/test/correctness.testData.js";
 
 const cache = {};
 
-test('padTo16Bytes already 16', ()  => {
-    const key = testData.key;
-    const paddedKey = padTo16Bytes(key);
-    cache.paddedKey = paddedKey;
-    expect(paddedKey).toBe(expectedValues.paddedKey);
-});
-
-test('padTo16Bytes less than 16', ()  => {
-    const key = testData.key15;
-    const paddedKey = padTo16Bytes(key);
-    expect(paddedKey).toBe(expectedValues.paddedKeyLess16);
-});
-
-test('ERR - padTo16Bytes more than 16', ()  => {
-    try {
-        const key = testData.key17;
-        const paddedKey = padTo16Bytes(key);
-        expect(0).toBe(1);
-    } catch (error) {
-        expect(error.message).toBe(expectedValues.ERR_INPUT_LENGTH_BIGGER_16);
-    }
-});
-
 test('Key HexToBin', ()  => {
-    const binaryKey = hexToBin(cache.paddedKey);
+    const binaryKey = hexToBin(testData.key);
     cache.binaryKey = binaryKey;
     expect(binaryKey).toBe(expectedValues.binaryKey);
 });
@@ -108,4 +82,13 @@ test('ERR - PC2 half-keys arrays lengths not ', ()  => {
 test("Complessive Key Schedulation", () => {
     const permutedKeys = keySchedulation(testData.key);
     expect(permutedKeys).toStrictEqual(expectedValues.permuted2Keys);
+});
+
+test("ERR - Complessive Key Schedulation key less 16", () => {
+    try {
+        const permutedKeys = keySchedulation(testData.key15);
+        expect(0).toBe(1);
+    } catch (error) {
+        expect(error.message).toBe(expectedValues.ERR_KEY_LENGTH_NOT_16);
+    }
 });

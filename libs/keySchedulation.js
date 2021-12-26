@@ -4,10 +4,7 @@ import {
 	PC2Table
 } from "./tables.js";
 
-import {
-    hexToBin,
-    padTo16Bytes
-} from "./utils.js";
+import { hexToBin } from "./utils.js";
 
 export const PC1 = (key) => {
 	let result = "";
@@ -53,8 +50,8 @@ export const PC2 = (cArray, dArray) => {
 };
 
 export const keySchedulation = (key) => {
-    const paddedKey = padTo16Bytes(key);
-    const binaryKey = hexToBin(paddedKey);
+	if (key.length != 16) throw new Error("ERR_KEY_LENGTH_NOT_16");
+    const binaryKey = hexToBin(key);
     const permuted1Key = PC1(binaryKey);
     const cArray0 = permuted1Key.substring(0, permuted1Key.length/2);
     const dArray0 = permuted1Key.substring(permuted1Key.length/2, permuted1Key.length);

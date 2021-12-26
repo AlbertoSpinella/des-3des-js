@@ -45,8 +45,8 @@ export const desCbcDecryption = (ciphertext, permutedKeys, iv) => {
     const plaintextBlocks = [];
     for (let i=0; i < ciphertext.length; i+=16)
         ciphertextBlocks.push(ciphertext.substring(i, i + 16));
-    for (let ciphertextBlock of ciphertextBlocks) {
-        if (ciphertextBlock.length != 16) ciphertextBlock = padTo16Bytes(ciphertextBlock);
+    for (const ciphertextBlock of ciphertextBlocks) {
+        if (ciphertextBlock.length != 16) throw new Error("ERR_INVALID_CIPHERTEXT_LENGTH");
         const plaintextBlock = desCbcDecryptionSingleBlock(ciphertextBlock, permutedKeys, iv);
         plaintextBlocks.push(plaintextBlock);
         iv = ciphertextBlock;

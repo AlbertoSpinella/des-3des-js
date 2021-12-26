@@ -44,7 +44,7 @@ test('Split in R0 and L0', ()  => {
     expect(R0).toBe(expectedValues.R0);
 });
 
-test('ERR - Split in R0 and L0', ()  => {
+test('ERR - Split in R0 and L0 invalid IPedPlaintext', ()  => {
     try {
         const { L0, R0 } = splitInL0AndR0(cache.IPedPlaintext.slice(0, -1));
         expect(0).toBe(1);
