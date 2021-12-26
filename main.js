@@ -1,11 +1,11 @@
 import { keySchedulation } from "./libs/keySchedulation.js";
-import { desEncryption } from "./libs/desEncryption.js";
+import { desEcb } from "./libs/desEcb.js";
 
 export const desEncrypt = (plaintext, key) => {
     console.log({ plaintext, key });
     const permutedKeys = keySchedulation(key);
 
-    const ciphertext = desEncryption(plaintext, permutedKeys);
+    const ciphertext = desEcb(plaintext, permutedKeys);
 
     return ciphertext;
 };
@@ -15,7 +15,7 @@ export const desDecrypt = (ciphertext, key) => {
     const permutedKeys = keySchedulation(key);
 
     const reversedKeys = permutedKeys.reverse();
-    const plaintext = desEncryption(ciphertext, reversedKeys);
+    const plaintext = desEcb(ciphertext, reversedKeys);
 
     return plaintext;
 };

@@ -1,5 +1,5 @@
 import { keySchedulation } from "../libs/keySchedulation.js";
-import { desEncryption } from "../libs/desEncryption.js";
+import { desEcb } from "../libs/desEcb.js";
 
 import { expectedValues } from "../libs/test/nist.expectedValues.js";
 import { testData } from "../libs/test/nist.testData.js";
@@ -12,7 +12,7 @@ test("Validate test data", () => {
 for (let i=0; i<testData.P.keys.length; i++) {
     test(`P test - ${i+1}/${testData.P.keys.length}`, ()  => {
         const permutedKeys = keySchedulation(testData.P.keys[i]);
-        const ciphertext = desEncryption(testData.P.plaintext, permutedKeys);
+        const ciphertext = desEcb(testData.P.plaintext, permutedKeys);
         expect(ciphertext).toBe(expectedValues.P.ciphertexts[i]);
     });
 }

@@ -15,8 +15,8 @@ import {
     encryptionRounds,
     switchAfterRounds,
     IPFinal,
-    desEncryption
-} from "../libs/desEncryption.js";
+    desEcb
+} from "../libs/desEcb.js";
 
 import { expectedValues } from "../libs/test/correctness.expectedValues.js";
 import { testData } from "../libs/test/correctness.testData.js";
@@ -120,13 +120,13 @@ test('IPFinal', ()  => {
 });
 
 test('Complessive DES encryption', ()  => {
-    const ciphertext = desEncryption(testData.plaintext, expectedValues.permuted2Keys);
+    const ciphertext = desEcb(testData.plaintext, expectedValues.permuted2Keys);
     expect(ciphertext).toBe(expectedValues.ciphertext);
 });
 
 test('ERR - Complessive DES encryption with plaintext not 16', ()  => {
     try {
-        const ciphertext = desEncryption(testData.plaintext.slice(0, -1), expectedValues.permuted2Keys);
+        const ciphertext = desEcb(testData.plaintext.slice(0, -1), expectedValues.permuted2Keys);
         expect(0).toBe(1);
     } catch (error) {
         expect(error.message).toBe(expectedValues.ERR_PLAINTEXT_LENGTH_NOT_16);
