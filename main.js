@@ -1,6 +1,9 @@
 import { keySchedulation } from "./libs/keySchedulation.js";
 import { desEcb } from "./libs/desEcb.js";
-import { desCbcEncryption, desCbcDecryption } from "./libs/desCbc.js";
+import {
+    desCbcEncryption,
+    desCbcDecryption
+} from "./libs/desCbc.js";
 
 export const desEcbEncrypt = (plaintext, key) => {
     console.log({ plaintext, key });
