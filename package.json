@@ -8,6 +8,7 @@
     "dev": "node main.js",
     "lint:check": "eslint -c ./.eslintrc.cjs .",
     "lint:fix": "eslint -c ./.eslintrc.cjs . --fix",
+    "test": "node --experimental-vm-modules node_modules/.bin/jest --detectOpenHandles",
     "test:correctness": "node --experimental-vm-modules node_modules/.bin/jest ./__correctness__test__ --detectOpenHandles",
     "test:nist": "node --experimental-vm-modules node_modules/.bin/jest ./__nist__test__ --detectOpenHandles",
     "test:random": "node --experimental-vm-modules node_modules/.bin/jest ./__random__test__ --detectOpenHandles"
