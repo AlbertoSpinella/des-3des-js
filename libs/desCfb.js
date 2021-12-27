@@ -1,0 +1,30 @@
+import { desEcb } from "./desEcb.js";
+import { hexToBin, xor, binToHex } from "./utils.js";
+
+export const desCfbEncryptionSingleBlock = (plaintextBlock, permutedKeys, iv) => {
+    if (plaintextBlock.length != 16) throw new Error("ERR_PLAINTEXT_LENGTH_NOT_16");
+    if (iv.length != 16) throw new Error("ERR_IV_LENGTH_NOT_16");
+    const intermediateBlock = desEcb(iv, permutedKeys);
+    const binaryIntermediateBlock = hexToBin(intermediateBlock);
+    const binaryPlaintext = hexToBin(plaintextBlock);
+    const binaryCiphertext = xor(binaryIntermediateBlock, binaryPlaintext);
+    const ciphertext = binToHex(binaryCiphertext);
+    return ciphertext;
+};
+
+export const desCfbEncryption = (plaintext, permutedKeys, iv, mode) => {
+    const plaintextBlocks = [];
+    const ciphertextBlocks = [];
+    for (let i=0; i < plaintext.length; i+=16)
+        plaintextBlocks.push(plaintext.substring(i, i + 16));
+    for (let plaintextBlock of plaintextBlocks) {
+        if (plaintextBlock.length != 16) plaintextBlock = padTo16Bytes(plaintextBlock);
+        const ciphertextBlock = desCfbEncryptionSingleBlock(plaintextBlock, permutedKeys, iv);
+        if (mode == "encryption") iv = ciphertextBlock;
+        else if (mode == "decryption") iv = plaintextBlock;
+        else throw new Error("ERR_INVALID_CDB_MODE");
+        ciphertextBlocks.push(ciphertextBlock);
+    }
+    const ciphertext = ciphertextBlocks.join("");
+    return ciphertext;
+};
