@@ -25,8 +25,9 @@ for (let i=0; i<RANDOM_TEST_AMOUNT; i++) {
 }
 
 for (let i=0; i<RANDOM_TEST_AMOUNT; i++) {
+    const randomNumber = Math.floor(Math.random() * 32) + 1;
     const hexKey = randomHexString(16);
-    const hexPlaintext = randomHexString(16);
+    const hexPlaintext = randomHexString(randomNumber);
     const hexIv = randomHexString(16);
     test(`DES CBC - Random key and plaintext test - ${i+1}/${RANDOM_TEST_AMOUNT}`, ()  => {
         const permutedKeys = keySchedulation(hexKey);
@@ -49,8 +50,9 @@ for (let i=0; i<RANDOM_TEST_AMOUNT; i++) {
 }
 
 for (let i=0; i<RANDOM_TEST_AMOUNT; i++) {
+    const randomNumber = Math.floor(Math.random() * 1024) + 1;
     const hexKey = randomHexString(16);
-    const hexPlaintext = randomHexString(16);
+    const hexPlaintext = randomHexString(randomNumber);
     const hexIv = randomHexString(16);
     test(`DES OFB - Random key and plaintext test - ${i+1}/${RANDOM_TEST_AMOUNT}`, ()  => {
         const permutedKeys = keySchedulation(hexKey);

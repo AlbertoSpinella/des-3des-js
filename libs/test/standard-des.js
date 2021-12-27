@@ -1,4 +1,18 @@
 import crypto from "crypto";
+import { padTo16Bytes } from "../utils.js";
+
+export const padPlaintextMultipleBlocks = (input) => {
+    const plaintextBlocks = [];
+    const plaintextBlocksPadded = [];
+    for (let i=0; i < input.length; i+=16)
+        plaintextBlocks.push(input.substring(i, i + 16));
+
+    for (let plaintextBlock of plaintextBlocks) {
+        if (plaintextBlock.length != 16) plaintextBlock = padTo16Bytes(plaintextBlock);
+        plaintextBlocksPadded.push(plaintextBlock);
+    }
+    return plaintextBlocksPadded.join("");
+};
 
 export const standardDesEcb = (hexKey, hexPlaintext) => {
     const key = Buffer.from(hexKey, "hex");
@@ -15,6 +29,7 @@ export const standardDesEcb = (hexKey, hexPlaintext) => {
 };
 
 export const standardDesCbc = (hexKey, hexPlaintext, hexIv) => {
+    hexPlaintext = padPlaintextMultipleBlocks(hexPlaintext);
     const key = Buffer.from(hexKey, "hex");
     const plaintext = Buffer.from(hexPlaintext, "hex");
     const iv = Buffer.from(hexIv, "hex");
@@ -30,6 +45,7 @@ export const standardDesCbc = (hexKey, hexPlaintext, hexIv) => {
 };
 
 export const standardDesCfb = (hexKey, hexPlaintext, hexIv) => {
+    hexPlaintext = padPlaintextMultipleBlocks(hexPlaintext);
     const key = Buffer.from(hexKey, "hex");
     const plaintext = Buffer.from(hexPlaintext, "hex");
     const iv = Buffer.from(hexIv, "hex");
@@ -45,6 +61,7 @@ export const standardDesCfb = (hexKey, hexPlaintext, hexIv) => {
 };
 
 export const standardDesOfb = (hexKey, hexPlaintext, hexIv) => {
+    hexPlaintext = padPlaintextMultipleBlocks(hexPlaintext);
     const key = Buffer.from(hexKey, "hex");
     const plaintext = Buffer.from(hexPlaintext, "hex");
     const iv = Buffer.from(hexIv, "hex");
