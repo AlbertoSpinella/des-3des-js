@@ -15,6 +15,7 @@ export const padPlaintextMultipleBlocks = (input) => {
 };
 
 export const standardDesEcb = (hexKey, hexPlaintext) => {
+    hexPlaintext = padPlaintextMultipleBlocks(hexPlaintext);
     const key = Buffer.from(hexKey, "hex");
     const plaintext = Buffer.from(hexPlaintext, "hex");
     

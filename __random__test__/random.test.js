@@ -14,8 +14,9 @@ import {
 const RANDOM_TEST_AMOUNT = 128;
 
 for (let i=0; i<RANDOM_TEST_AMOUNT; i++) {
+    const randomNumber = Math.floor(Math.random() * 32) + 1;
     const hexKey = randomHexString(16);
-    const hexPlaintext = randomHexString(16);
+    const hexPlaintext = randomHexString(randomNumber);
     test(`DES ECB - Random key and plaintext test - ${i+1}/${RANDOM_TEST_AMOUNT}`, ()  => {
         const permutedKeys = keySchedulation(hexKey);
         const ciphertextToTest = desEcb(hexPlaintext, permutedKeys);

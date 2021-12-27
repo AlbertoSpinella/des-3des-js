@@ -9,8 +9,9 @@ import {
 import {
     hexToBin,
     xor,
-    intToBinPadded,
-    binToHex
+    intToBinPaddedMax4Byte,
+    binToHex,
+    padTo16Bytes
 } from "./utils.js";
 
 export const IP = (plaintext) => {
@@ -48,7 +49,7 @@ export const findInS = (i, six) => {
     row = parseInt(row, 2);
     col = parseInt(col, 2);
     const numericSResult = sTable[i][row][col];
-    const binarySResult =  intToBinPadded(numericSResult);
+    const binarySResult =  intToBinPaddedMax4Byte(numericSResult);
     return binarySResult;
 };
 
@@ -109,13 +110,20 @@ export const IPFinal = (switched)  => {
 };
 
 export const desEcb = (plaintext, permutedKeys) => {
-    if (plaintext.length != 16) throw new Error("ERR_PLAINTEXT_LENGTH_NOT_16");
-    const binaryPlaintext = hexToBin(plaintext);
-    const IPedPlaintext = IP(binaryPlaintext);
-    const { L0, R0 } = splitInL0AndR0(IPedPlaintext);
-    const { LArray, RArray } = encryptionRounds(L0, R0, permutedKeys);
-    const switched = switchAfterRounds(LArray[LArray.length - 1], RArray[RArray.length - 1]);
-    const binaryCiphertext = IPFinal(switched);
-    const ciphertext = binToHex(binaryCiphertext);
-    return ciphertext;
+    const plaintextBlocks = [];
+    const ciphertextBlocks = [];
+    for (let i=0; i < plaintext.length; i+=16)
+        plaintextBlocks.push(plaintext.substring(i, i + 16));
+    for (let plaintextBlock of plaintextBlocks) {
+        if (plaintextBlock.length != 16) plaintextBlock = padTo16Bytes(plaintextBlock);
+        const binaryPlaintext = hexToBin(plaintextBlock);
+        const IPedPlaintext = IP(binaryPlaintext);
+        const { L0, R0 } = splitInL0AndR0(IPedPlaintext);
+        const { LArray, RArray } = encryptionRounds(L0, R0, permutedKeys);
+        const switched = switchAfterRounds(LArray[LArray.length - 1], RArray[RArray.length - 1]);
+        const binaryCiphertext = IPFinal(switched);
+        const ciphertext = binToHex(binaryCiphertext);
+        ciphertextBlocks.push(ciphertext);
+    }
+    return ciphertextBlocks.join("");
 };

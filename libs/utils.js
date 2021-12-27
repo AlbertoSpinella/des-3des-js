@@ -25,10 +25,17 @@ export const xor = (a, b) => {
 	return result;
 };
 
-export const intToBinPadded = (binary) => {
+export const intToBinPaddedMax4Byte = (binary) => {
 	let number = binary.toString(2);
 	if (number.length > 4) throw new Error("ERR_BIN_TO_INT_PADDED_MORE_4");
 	while (number.length < 4) number = `0${number}`;
+	return number;
+};
+
+export const intToBinPaddedMax64Byte = (binary) => {
+	let number = binary.toString(2);
+	if (number.length > 64) throw new Error("ERR_BIN_TO_INT_PADDED_MORE_64");
+	while (number.length < 64) number = `0${number}`;
 	return number;
 };
 

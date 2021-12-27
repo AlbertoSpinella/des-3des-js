@@ -1,7 +1,7 @@
 import {
     hexToBin,
     xor,
-    intToBinPadded,
+    intToBinPaddedMax4Byte,
     binToHex
 } from "../libs/utils.js";
 
@@ -80,9 +80,9 @@ test('Feistel sBoxDivision', ()  => {
     expect(sBoxed).toBe(expectedValues.sBoxed);
 });
 
-test('ERR - IntToBinPadded invalid numericSResult', ()  => {
+test('ERR - intToBinPaddedMax4Byte invalid numericSResult', ()  => {
     try {
-        const binarySResult = intToBinPadded(16);
+        const binarySResult = intToBinPaddedMax4Byte(16);
         expect(0).toBe(1);
     } catch (error) {
         expect(error.message).toBe(expectedValues.ERR_BIN_TO_INT_PADDED_MORE_4);
