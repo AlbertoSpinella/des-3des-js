@@ -1,5 +1,5 @@
 import { desEcb } from "./desEcb.js";
-import { hexToBin, xor, binToHex } from "./utils.js";
+import { hexToBin, xor, binToHex, padTo16Bytes } from "./utils.js";
 
 export const desCfbEncryptionSingleBlock = (plaintextBlock, permutedKeys, iv) => {
     if (plaintextBlock.length != 16) throw new Error("ERR_PLAINTEXT_LENGTH_NOT_16");
@@ -22,7 +22,7 @@ export const desCfbEncryption = (plaintext, permutedKeys, iv, mode) => {
         const ciphertextBlock = desCfbEncryptionSingleBlock(plaintextBlock, permutedKeys, iv);
         if (mode == "encryption") iv = ciphertextBlock;
         else if (mode == "decryption") iv = plaintextBlock;
-        else throw new Error("ERR_INVALID_CDB_MODE");
+        else throw new Error("ERR_INVALID_CFB_MODE");
         ciphertextBlocks.push(ciphertextBlock);
     }
     const ciphertext = ciphertextBlocks.join("");

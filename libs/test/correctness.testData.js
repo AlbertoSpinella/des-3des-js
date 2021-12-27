@@ -8,5 +8,6 @@ export const testData = {
     plaintext15: "0123456789ABCDE",
     plaintext17: "0123456789ABCDEFF",
     iv: "AABBCCDDAABBCCDD",
-    plaintextCbc: "0123456789ABCDEF0A1B2C3D4E5F6A7B"
+    plaintextCbc: "0123456789ABCDEF0A1B2C3D4E5F6A7B",
+    plaintextCfb: "0123456789ABCDEF0A1B2C3D4E5F6A7B"
 };

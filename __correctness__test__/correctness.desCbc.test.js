@@ -36,7 +36,7 @@ test('padTo16Bytes more 16', () => {
 test('DES CBC encryption single block', () => {
     const ciphertextBlock = desCbcEncryptionSingleBlock(testData.plaintext, expectedValues.permuted2Keys, testData.iv);
     cache.ciphertextBlock = ciphertextBlock;
-    expect(ciphertextBlock).toBe(expectedValues.ciphertextBlock);
+    expect(ciphertextBlock).toBe(expectedValues.ciphertextBlockCbc);
 });
 
 test('ERR - DES CBC encryption single block invalid plaintext', () => {
