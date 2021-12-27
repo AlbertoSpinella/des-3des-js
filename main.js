@@ -5,6 +5,7 @@ import {
     desCbcDecryption
 } from "./libs/desCbc.js";
 import { desCfbEncryption } from "./libs/desCfb.js";
+import { desOfbEncryption } from "./libs/desOfb.js";
 
 export const desEcbEncrypt = (plaintext, key) => {
     console.log({ plaintext, key });
@@ -52,6 +53,15 @@ export const desCfbEncrypt = (plaintext, key, iv, mode) => {
     return ciphertext;
 };
 
+export const desOfbEncrypt = (plaintext, key, iv, mode) => {
+    console.log({ plaintext, key, iv });
+    const permutedKeys = keySchedulation(key);
+
+    const ciphertext = desOfbEncryption(plaintext, permutedKeys, iv, mode);
+
+    return ciphertext;
+};
+
 console.log("DES ECB encryption...");
 const desEcbEncrypted = desEcbEncrypt("0123456789ABCDEF", "133457799BBCDFF1");
 console.log({ ciphertext: desEcbEncrypted });
@@ -75,3 +85,11 @@ console.log({ ciphertext: desCfbEncrypted });
 console.log("\nDES CFB decryption...");
 const desCfbDecrypted = desCfbEncrypt(desCfbEncrypted, "133457799BBCDFF1", "AABBCCDDAABBCCDD", "decryption");
 console.log({ plaintext: desCfbDecrypted });
+
+console.log("\nDES OFB encryption...");
+const desOfbEncrypted = desOfbEncrypt("0123456789ABCDEF0A1B2C3D4E5F6A7B", "133457799BBCDFF1", "AABBCCDDAABBCCDD", "encryption");
+console.log({ ciphertext: desOfbEncrypted });
+
+console.log("\nDES OFB decryption...");
+const desOfbDecrypted = desOfbEncrypt(desOfbEncrypted, "133457799BBCDFF1", "AABBCCDDAABBCCDD", "decryption");
+console.log({ plaintext: desOfbDecrypted });
