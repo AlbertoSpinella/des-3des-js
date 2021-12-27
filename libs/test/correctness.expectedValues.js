@@ -125,5 +125,12 @@ export const expectedValues  =  {
     ciphertextBlockCfb: "2E49E25A2005EB7C",
     ciphertextCfb: "2E49E25A2005EB7CF63AC95D6C6B8271",
     ERR_INVALID_CFB_MODE: "ERR_INVALID_CFB_MODE",
-    ciphertextCfbLess16: "2E49E25A2005EB7CF63AC95D6C6B827A"
+    ciphertextCfbLess16: "2E49E25A2005EB7CF63AC95D6C6B827A",
+    ciphertextBlockOfb: {
+        ciphertextBlock: "2E49E25A2005EB7C",
+        newIv: "2F6AA73DA9AE2693"
+    },
+    ciphertextOfb: "2E49E25A2005EB7CD799445021AAFF15",
+    ciphertextOfbLess16: "2E49E25A2005EB7CD799445021AAFF1E",
+    ERR_INVALID_OFB_MODE: "ERR_INVALID_OFB_MODE"
 };

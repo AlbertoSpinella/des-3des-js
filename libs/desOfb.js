@@ -12,7 +12,7 @@ export const desOfbEncryptionSingleBlock = (plaintextBlock, permutedKeys, iv) =>
     return { ciphertextBlock: ciphertext, newIv: intermediateBlock };
 };
 
-export const desOfbEncryption = (plaintext, permutedKeys, iv, mode) => {
+export const desOfbEncryption = (plaintext, permutedKeys, iv) => {
     const plaintextBlocks = [];
     const ciphertextBlocks = [];
     for (let i=0; i < plaintext.length; i+=16)
