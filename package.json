@@ -9,9 +9,12 @@
     "lint:check": "eslint -c ./.eslintrc.cjs .",
     "lint:fix": "eslint -c ./.eslintrc.cjs . --fix",
     "test": "node --experimental-vm-modules node_modules/.bin/jest --detectOpenHandles",
-    "test:correctness": "node --experimental-vm-modules node_modules/.bin/jest ./__correctness__test__ --detectOpenHandles",
-    "test:nist": "node --experimental-vm-modules node_modules/.bin/jest ./__nist__test__ --detectOpenHandles",
-    "test:random": "node --experimental-vm-modules node_modules/.bin/jest ./__random__test__ --detectOpenHandles"
+    "test:correctness:lin": "node --experimental-vm-modules node_modules/.bin/jest ./__correctness__test__ --detectOpenHandles",
+    "test:correctness:win": "node --experimental-vm-modules node_modules/jest/bin/jest.js ./__correctness__test__ --detectOpenHandles",
+    "test:nist:lin": "node --experimental-vm-modules node_modules/.bin/jest ./__nist__test__ --detectOpenHandles",
+    "test:nist:win": "node --experimental-vm-modules node_modules/jest/bin/jest.js ./__nist__test__ --detectOpenHandles",
+    "test:random:lin": "node --experimental-vm-modules node_modules/.bin/jest ./__random__test__ --detectOpenHandles",
+    "test:random:win": "node --experimental-vm-modules node_modules/jest/bin/jest.js ./__random__test__ --detectOpenHandles"
   },
   "author": "",
   "license": "ISC",
