@@ -18,6 +18,8 @@ For DES correctness testing reference, visit NIST: https://nvlpubs.nist.gov/nist
  - Run `npm run test:nist` for nist test
  - Run `npm run test:random` for test with random keys & plaintexts
 
+Note: depending on your OS, you must choose `lin` or `win`. Check `package.json` to find exact scripts
+
 ## 3. How it works
 ### general
 ![general](https://github.com/AlbertoSpinella/des-3des-js/blob/master/img/general.png)
