@@ -51,7 +51,5 @@ Note: depending on your OS, you must replace `os` with `lin` or `win`. Check `pa
 ![3DES OFB Decryption](https://github.com/AlbertoSpinella/des-3des-js/blob/master/img/3ofb-d.png)
 ## 4. Notes
  - There's a refuse in NIST test data. Precisely, at page 28 (`IP AND E TEST`) the ciphertext n. 30 has the digit `4` one column right than the expected. My test data consider this and is settled about it.
- - NIST ciphertext:
- - `0000000040000000`
- - Fixed ciphertext:
- - `0000000400000000`
+
+![NIST refuse](https://github.com/AlbertoSpinella/des-3des-js/blob/master/img/nist-refuse.png)
