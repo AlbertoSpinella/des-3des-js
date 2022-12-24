@@ -13,12 +13,12 @@ For DES correctness testing reference, visit NIST: https://nvlpubs.nist.gov/nist
  - Run `npm ci` to install dependencies
 
 ## 2. Run tests
- - Run `npm t` for complessive test
- - Run `npm run test:correctness` for correctness test
- - Run `npm run test:nist` for nist test
- - Run `npm run test:random` for test with random keys & plaintexts
+ - Run `npm run test:os` for complessive test
+ - Run `npm run test:correctness:os` for correctness test
+ - Run `npm run test:nist:os` for nist test
+ - Run `npm run test:random:os` for test with random keys & plaintexts
 
-Note: depending on your OS, you must choose `lin` or `win`. Check `package.json` to find exact scripts
+Note: depending on your OS, you must replace `os` with `lin` or `win`. Check `package.json` to find exact scripts
 
 ## 3. How it works
 ### general
