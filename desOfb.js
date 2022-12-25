@@ -1,5 +1,5 @@
 import { keySchedulation } from "./libs/keySchedulation.js";
-import { desOfbEncryption } from "./libs/desOfb.js";
+import { desOfbEncryption } from "./libs/desOfbUtils.js";
 
 export const desOfbEncrypt = (plaintext, key, iv) => {
     console.log({ plaintext, key, iv });

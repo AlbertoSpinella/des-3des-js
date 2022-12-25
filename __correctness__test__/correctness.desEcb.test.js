@@ -16,7 +16,7 @@ import {
     switchAfterRounds,
     IPFinal,
     desEcb
-} from "../libs/desEcb.js";
+} from "../libs/desEcbUtils.js";
 
 import { expectedValues } from "../libs/test/correctness.expectedValues.js";
 import { testData } from "../libs/test/correctness.testData.js";

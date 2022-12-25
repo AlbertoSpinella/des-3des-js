@@ -1,7 +1,7 @@
 import {
     desOfbEncryptionSingleBlock,
     desOfbEncryption,
-} from "../libs/desOfb.js";
+} from "../libs/desOfbUtils.js";
 
 import { expectedValues } from "../libs/test/correctness.expectedValues.js";
 import { testData } from "../libs/test/correctness.testData.js";

@@ -1,4 +1,4 @@
-import { desEcb } from "./desEcb.js";
+import { desEcb } from "./desEcbUtils.js";
 import { binToHex, hexToBin, xor, padTo16Bytes } from "./utils.js";
 
 export const desCbcEncryptionSingleBlock = (plaintextBlock, permutedKeys, iv) => {

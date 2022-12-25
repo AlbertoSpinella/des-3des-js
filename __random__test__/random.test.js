@@ -1,9 +1,9 @@
 import { randomHexString } from "../libs/test/test.utils.js";
 import { keySchedulation } from "../libs/keySchedulation.js";
-import { desEcb } from "../libs/desEcb.js";
-import { desCbcEncryption } from "../libs/desCbc.js";
-import { desCfbEncryption } from "../libs/desCfb.js";
-import { desOfbEncryption } from "../libs/desOfb.js";
+import { desEcb } from "../libs/desEcbUtils.js";
+import { desCbcEncryption } from "../libs/desCbcUtils.js";
+import { desCfbEncryption } from "../libs/desCfbUtils.js";
+import { desOfbEncryption } from "../libs/desOfbUtils.js";
 import {
     standardDesEcb,
     standardDesCbc,

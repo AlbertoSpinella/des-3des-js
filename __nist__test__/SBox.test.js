@@ -1,5 +1,5 @@
 import { keySchedulation } from "../libs/keySchedulation.js";
-import { desEcb } from "../libs/desEcb.js";
+import { desEcb } from "../libs/desEcbUtils.js";
 
 import { expectedValues } from "../libs/test/nist.expectedValues.js";
 import { testData } from "../libs/test/nist.testData.js";
