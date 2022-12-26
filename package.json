@@ -11,6 +11,7 @@
     "des:cfb": "node desCfb.js",
     "3des:cfb": "node 3desCfb.js",
     "des:ofb": "node desOfb.js",
+    "3des:ofb": "node 3desOfb.js",
     "lint:check": "eslint -c ./.eslintrc.cjs .",
     "lint:fix": "eslint -c ./.eslintrc.cjs . --fix",
     "test:lin": "node --experimental-vm-modules node_modules/.bin/jest --detectOpenHandles",
