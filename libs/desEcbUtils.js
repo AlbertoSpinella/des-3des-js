@@ -110,6 +110,7 @@ export const IPFinal = (switched)  => {
 };
 
 export const desEcbEncryptionSingleBlock = (plaintext, permutedKeys) => {
+    if (plaintext.length != 16) throw new Error("ERR_PLAINTEXT_LENGTH_NOT_16");
     const binaryPlaintext = hexToBin(plaintext);
     const IPedPlaintext = IP(binaryPlaintext);
     const { L0, R0 } = splitInL0AndR0(IPedPlaintext);
