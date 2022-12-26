@@ -109,6 +109,17 @@ export const IPFinal = (switched)  => {
     return result;
 };
 
+export const desEcbEncryptionSingleBlock = (plaintext, permutedKeys) => {
+    const binaryPlaintext = hexToBin(plaintext);
+    const IPedPlaintext = IP(binaryPlaintext);
+    const { L0, R0 } = splitInL0AndR0(IPedPlaintext);
+    const { LArray, RArray } = encryptionRounds(L0, R0, permutedKeys);
+    const switched = switchAfterRounds(LArray[LArray.length - 1], RArray[RArray.length - 1]);
+    const binaryCiphertext = IPFinal(switched);
+    const ciphertext = binToHex(binaryCiphertext);
+    return ciphertext;
+};
+
 export const desEcb = (plaintext, permutedKeys) => {
     const plaintextBlocks = [];
     const ciphertextBlocks = [];
@@ -116,13 +127,7 @@ export const desEcb = (plaintext, permutedKeys) => {
         plaintextBlocks.push(plaintext.substring(i, i + 16));
     for (let plaintextBlock of plaintextBlocks) {
         if (plaintextBlock.length != 16) plaintextBlock = padTo16Bytes(plaintextBlock);
-        const binaryPlaintext = hexToBin(plaintextBlock);
-        const IPedPlaintext = IP(binaryPlaintext);
-        const { L0, R0 } = splitInL0AndR0(IPedPlaintext);
-        const { LArray, RArray } = encryptionRounds(L0, R0, permutedKeys);
-        const switched = switchAfterRounds(LArray[LArray.length - 1], RArray[RArray.length - 1]);
-        const binaryCiphertext = IPFinal(switched);
-        const ciphertext = binToHex(binaryCiphertext);
+        const ciphertext = desEcbEncryptionSingleBlock(plaintextBlock, permutedKeys);
         ciphertextBlocks.push(ciphertext);
     }
     return ciphertextBlocks.join("");

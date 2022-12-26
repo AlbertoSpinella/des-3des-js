@@ -9,6 +9,7 @@
     "des:cbc": "node desCbc.js",
     "3des:cbc": "node 3desCbc.js",
     "des:cfb": "node desCfb.js",
+    "3des:cfb": "node 3desCfb.js",
     "des:ofb": "node desOfb.js",
     "lint:check": "eslint -c ./.eslintrc.cjs .",
     "lint:fix": "eslint -c ./.eslintrc.cjs . --fix",
