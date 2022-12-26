@@ -10,4 +10,6 @@ const config =  {
   testTimeout: 15000
 };
 
+process.env.testing = "true";
+
 export default config;

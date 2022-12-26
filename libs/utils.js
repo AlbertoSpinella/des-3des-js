@@ -48,3 +48,7 @@ export const binToHex = (binary) => {
 	}
 	return result;
 };
+
+export const print = (element) => {
+    if (process.env.testing != "true") console.log(element);
+};

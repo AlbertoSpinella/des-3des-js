@@ -3,10 +3,11 @@ import {
     desCbcEncryptionSingleBlock,
     desCbcDecryptionSingleBlock
 } from "./libs/desCbcUtils.js";
+import { padTo16Bytes, print } from "./libs/utils.js";
 
 export const tripleDesCbcEncrypt = (plaintext, key, iv) => {
     if (key.length != 48) throw new Error("ERR_KEY_LENGTH_NOT_48");
-    console.log({ plaintext, key, iv });
+    print({ plaintext, key, iv });
 
     const key1 = key.substring(0, 16);
     const key2 = key.substring(16, 32);
@@ -33,7 +34,7 @@ export const tripleDesCbcEncrypt = (plaintext, key, iv) => {
 
 export const tripleDesCbcDecrypt = (ciphertext, key, iv) => {
     if (key.length != 48) throw new Error("ERR_KEY_LENGTH_NOT_48");
-    console.log({ ciphertext, key, iv });
+    print({ ciphertext, key, iv });
 
     const key1 = key.substring(0, 16);
     const key2 = key.substring(16, 32);
@@ -58,10 +59,10 @@ export const tripleDesCbcDecrypt = (ciphertext, key, iv) => {
     return plaintext;
 };
 
-console.log("\n3 DES CBC encryption...");
+print("\n3 DES CBC encryption...");
 const desCbcEncrypted = tripleDesCbcEncrypt("0123456789ABCDEF0A1B2C3D4E5F6A7B", "133457799BBCDFF1475433098D5C01704F82A025AA2EE8BB", "AABBCCDDAABBCCDD");
-console.log({ ciphertext: desCbcEncrypted });
+print({ ciphertext: desCbcEncrypted });
 
-console.log("\nDES CBC decryption...");
+print("\nDES CBC decryption...");
 const desCbcDecrypted = tripleDesCbcDecrypt(desCbcEncrypted, "133457799BBCDFF1475433098D5C01704F82A025AA2EE8BB", "AABBCCDDAABBCCDD");
-console.log({ plaintext: desCbcDecrypted });
+print({ plaintext: desCbcDecrypted });
