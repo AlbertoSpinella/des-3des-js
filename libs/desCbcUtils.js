@@ -15,8 +15,7 @@ export const desCbcEncryptionSingleBlock = (plaintextBlock, permutedKeys, iv) =>
 export const desCbcDecryptionSingleBlock = (ciphertextBlock, permutedKeys, iv) => {
     if (ciphertextBlock.length != 16) throw new Error("ERR_CIPHERTEXT_LENGTH_NOT_16");
     if (iv.length != 16) throw new Error("ERR_IV_LENGTH_NOT_16");
-    const reversedKeys = [...permutedKeys].reverse();
-    const intermediateBlock = desEcb(ciphertextBlock, reversedKeys);
+    const intermediateBlock = desEcb(ciphertextBlock, permutedKeys);
     const binaryIntermediateBlock = hexToBin(intermediateBlock);
     const binaryIv = hexToBin(iv);
     const binaryPlaintext = xor(binaryIntermediateBlock, binaryIv);
@@ -41,13 +40,15 @@ export const desCbcEncryption = (plaintext, permutedKeys, iv) => {
 };
 
 export const desCbcDecryption = (ciphertext, permutedKeys, iv) => {
+    const reversedKeys = [...permutedKeys].reverse();
+    
     const ciphertextBlocks = [];
     const plaintextBlocks = [];
     for (let i=0; i < ciphertext.length; i+=16)
         ciphertextBlocks.push(ciphertext.substring(i, i + 16));
     for (const ciphertextBlock of ciphertextBlocks) {
         if (ciphertextBlock.length != 16) throw new Error("ERR_INVALID_CIPHERTEXT_LENGTH");
-        const plaintextBlock = desCbcDecryptionSingleBlock(ciphertextBlock, permutedKeys, iv);
+        const plaintextBlock = desCbcDecryptionSingleBlock(ciphertextBlock, reversedKeys, iv);
         plaintextBlocks.push(plaintextBlock);
         iv = ciphertextBlock;
     }

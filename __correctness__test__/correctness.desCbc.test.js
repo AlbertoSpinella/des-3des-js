@@ -69,7 +69,9 @@ test('DES CBC complete encryption less 16', () => {
 });
 
 test('DES CBC decryption single block', () => {
-    const plaintextBlock = desCbcDecryptionSingleBlock(cache.ciphertextBlock, expectedValues.permuted2Keys, testData.iv);
+    const reversedKeys = [...expectedValues.permuted2Keys].reverse();
+
+    const plaintextBlock = desCbcDecryptionSingleBlock(cache.ciphertextBlock, reversedKeys, testData.iv);
     expect(plaintextBlock).toBe(testData.plaintext);
 });
 

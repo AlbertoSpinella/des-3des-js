@@ -14,6 +14,7 @@ export const tripleDesCbcEncrypt = (plaintext, key, iv) => {
     const key3 = key.substring(32, 48);
     const permutedKeys1 = keySchedulation(key1);
     const permutedKeys2 = keySchedulation(key2);
+    const reversedKeys2 = [...permutedKeys2].reverse();
     const permutedKeys3 = keySchedulation(key3);
 
     const plaintextBlocks = [];
@@ -23,7 +24,7 @@ export const tripleDesCbcEncrypt = (plaintext, key, iv) => {
     for (let plaintextBlock of plaintextBlocks) {
         if (plaintextBlock.length != 16) plaintextBlock = padTo16Bytes(plaintextBlock);
         const firstRound = desCbcEncryptionSingleBlock(plaintextBlock, permutedKeys1, iv);
-        const secondRound = desCbcDecryptionSingleBlock(firstRound, permutedKeys2, iv);
+        const secondRound = desCbcDecryptionSingleBlock(firstRound, reversedKeys2, iv);
         const ciphertextBlock = desCbcEncryptionSingleBlock(secondRound, permutedKeys3, iv);
         iv = ciphertextBlock;
         ciphertextBlocks.push(ciphertextBlock);

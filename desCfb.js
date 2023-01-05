@@ -2,7 +2,9 @@ import { keySchedulation } from "./libs/keySchedulation.js";
 import { desCfbEncryption } from "./libs/desCfbUtils.js";
 
 export const desCfbEncrypt = (plaintext, key, iv, mode) => {
-    console.log({ plaintext, key, iv });
+    if (mode == "encryption") console.log({ plaintext, key, iv });
+    else if (mode == "decryption") console.log({ ciphertext: plaintext, key, iv });
+    else throw new Error("INVALID_MODE");
     const permutedKeys = keySchedulation(key);
 
     const ciphertext = desCfbEncryption(plaintext, permutedKeys, iv, mode);
